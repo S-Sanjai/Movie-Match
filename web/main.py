@@ -346,7 +346,7 @@ async def movie_details_api(movie_id: int):
     except Exception as e:
         return {"success": False, "error": str(e)}
 
-@app.get("/api/trending")
+@app.get("/api/trending", methods=["GET", "HEAD"])
 async def trending_api():
     """API Endpoint to get trending movie titles"""
     try:
@@ -367,7 +367,7 @@ ASSETS_DIR = os.path.join(DIST_DIR, "assets")
 if os.path.exists(ASSETS_DIR):
     app.mount("/assets", StaticFiles(directory=ASSETS_DIR), name="assets")
 
-@app.get("/")
+@app.get("/", methods=["GET", "HEAD"])
 async def serve_index():
     """Serve the index.html from dist"""
     index_path = os.path.join(DIST_DIR, "index.html")
