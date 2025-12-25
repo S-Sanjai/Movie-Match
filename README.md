@@ -38,6 +38,8 @@ Built with Custom ML Algorithms · React · TypeScript · FastAPI
 - 💾 **LRU Caching** - Fast responses with intelligent caching
 - ⚙️ **Parallel Processing** - Concurrent API calls for optimal performance
 
+> **Live Demo**: [https://s-sanjai.github.io/Movie-Match/](https://s-sanjai.github.io/Movie-Match/)
+
 ## 📸 Preview
 
 ### Homepage
@@ -51,8 +53,6 @@ Built with Custom ML Algorithms · React · TypeScript · FastAPI
 
 ### Project Details
 ![Technical Overview](web/src/assets/Project.png)
-
-> **Live Demo**: [https://s-sanjai.github.io/Movie-Match/](https://s-sanjai.github.io/Movie-Match/)
 
 ## 🏗️ Architecture
 
