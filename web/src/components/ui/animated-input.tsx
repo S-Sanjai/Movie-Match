@@ -170,7 +170,7 @@ export function OrbInput({ value, onChange, onKeyDown, onFocus, onBlur, compact 
                         className={`${compact ? 'w-7 h-7' : 'w-8 h-8 md:w-10 md:h-10'} rounded-full overflow-hidden transition-all duration-300 scale-100 hover:scale-125 cursor-pointer active:scale-95`}
                     >
                         <img
-                            src="https://media.giphy.com/media/26gsuUjoEBmLrNBxC/giphy.gif"
+                            src="/Movie-Match/orb.gif"
                             alt="Animated orb"
                             className="w-full h-full object-cover"
                         />
