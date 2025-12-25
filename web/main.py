@@ -188,6 +188,68 @@ def search_tmdb_multiple_sync(query, limit=3):
         print(f"Error searching TMDB multiple {query}: {e}")
     return movies
 
+def search_tmdb_mixed_sync(query, movie_limit=6, tv_limit=4):
+    """Search TMDB for both movies and TV shows, return combined results"""
+    results = []
+    try:
+        # Search movies
+        movie_url = f"https://api.themoviedb.org/3/search/movie?api_key={API_KEY}&language=en-US&query={requests.utils.quote(query)}&page=1&include_adult=false"
+        movie_response = requests.get(movie_url, timeout=2)
+        
+        # Search TV shows
+        tv_url = f"https://api.themoviedb.org/3/search/tv?api_key={API_KEY}&language=en-US&query={requests.utils.quote(query)}&page=1&include_adult=false"
+        tv_response = requests.get(tv_url, timeout=2)
+        
+        movie_ids = []
+        tv_ids = []
+        
+        if movie_response.status_code == 200:
+            movie_results = movie_response.json().get('results', [])
+            movie_ids = [r['id'] for r in movie_results[:movie_limit]]
+        
+        if tv_response.status_code == 200:
+            tv_results = tv_response.json().get('results', [])
+            tv_ids = [('tv', r['id']) for r in tv_results[:tv_limit]]
+        
+        # Fetch movie details in parallel
+        if movie_ids:
+            with ThreadPoolExecutor(max_workers=movie_limit) as executor:
+                movies = list(executor.map(get_tmdb_details_sync, movie_ids))
+                results.extend([m for m in movies if m])
+        
+        # Fetch TV show details in parallel
+        if tv_ids:
+            with ThreadPoolExecutor(max_workers=tv_limit) as executor:
+                tv_shows = list(executor.map(lambda x: get_tmdb_tv_details_sync(x[1]), tv_ids))
+                results.extend([t for t in tv_shows if t])
+                
+    except Exception as e:
+        print(f"Error searching TMDB mixed {query}: {e}")
+    return results
+
+def get_tmdb_tv_details_sync(tv_id):
+    """Get TV show details from TMDB"""
+    try:
+        url = f"https://api.themoviedb.org/3/tv/{tv_id}?api_key={API_KEY}&language=en-US"
+        response = requests.get(url, timeout=2)
+        
+        if response.status_code == 200:
+            data = response.json()
+            return {
+                'id': f"tv-{data.get('id')}",  # Prefix with 'tv-' to distinguish
+                'title': data.get('name'),
+                'poster': f"https://image.tmdb.org/t/p/w500{data.get('poster_path')}" if data.get('poster_path') else "https://via.placeholder.com/500x750?text=No+Image",
+                'backdrop': f"https://image.tmdb.org/t/p/original{data.get('backdrop_path')}" if data.get('backdrop_path') else None,
+                'overview': data.get('overview', ''),
+                'genres': [g['name'] for g in data.get('genres', [])],
+                'vote_average': data.get('vote_average', 0),
+                'release_date': data.get('first_air_date', 'Unknown'),
+                'media_type': 'tv'
+            }
+    except Exception as e:
+        print(f"Error fetching TV details for {tv_id}: {e}")
+    return None
+
 @lru_cache(maxsize=64)
 def get_tmdb_recommendations_sync(movie_id):
     """Get recommendations from TMDB (Cached)"""
@@ -269,11 +331,11 @@ async def search_legacy(title: str):
 async def search_api(q: str):
     """API Endpoint to search for a movie"""
     try:
-        # Search TMDB for candidates (up to 10 for better suggestions)
-        movies = await run_in_threadpool(search_tmdb_multiple_sync, q, limit=10)
+        # Search TMDB for both movies (6) and TV shows (4)
+        results_list = await run_in_threadpool(search_tmdb_mixed_sync, q, movie_limit=6, tv_limit=4)
         
         formatted_results = []
-        for m in movies:
+        for m in results_list:
             formatted = transform_movie_data(m)
             if formatted['matchPercentage'] is None:
                 formatted['matchPercentage'] = 100
