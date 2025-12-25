@@ -133,7 +133,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSelectMovie, compact = f
             />
 
             {isOpen && results.length > 0 && (
-                <div className="absolute mt-2 w-full bg-[#111]/95 backdrop-blur-md rounded-xl shadow-2xl border border-white/10 overflow-hidden max-h-96 overflow-y-auto z-50">
+                <div className="absolute mt-2 w-full bg-[#111]/95 backdrop-blur-md rounded-xl shadow-2xl border border-white/10 overflow-hidden max-h-[216px] overflow-y-auto z-50 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent hover:scrollbar-thumb-white/30">
                     {results.map((movie, index) => (
                         <div
                             key={movie.id}

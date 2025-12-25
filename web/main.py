@@ -269,8 +269,8 @@ async def search_legacy(title: str):
 async def search_api(q: str):
     """API Endpoint to search for a movie"""
     try:
-        # Search TMDB for candidates (up to 3)
-        movies = await run_in_threadpool(search_tmdb_multiple_sync, q, limit=3)
+        # Search TMDB for candidates (up to 10 for better suggestions)
+        movies = await run_in_threadpool(search_tmdb_multiple_sync, q, limit=10)
         
         formatted_results = []
         for m in movies:
