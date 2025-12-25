@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineMatch | Movie Recommender</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-section">
+                <h1>CineMatch</h1>
+                <p class="tagline">Engineered by You</p>
+            </div>
+            <div class="header-links">
+                <a href="https://github.com/yourusername" target="_blank" class="social-link">GitHub</a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank" class="social-link">LinkedIn</a>
+            </div>
+        </header>
+
+        <section class="tech-specs-banner">
+            <div class="tech-spec">
+                <span class="spec-label">ALGORITHM</span>
+                <span class="spec-value">k-NN (Custom Implementation)</span>
+            </div>
+            <div class="tech-spec">
+                <span class="spec-label">DATASET</span>
+                <span class="spec-value">5000+ Movies</span>
+            </div>
+            <div class="tech-spec">
+                <span class="spec-label">LATENCY</span>
+                <span class="spec-value">&lt;50ms</span>
+            </div>
+            <div class="tech-spec">
+                <span class="spec-label">SCRAPER</span>
+                <span class="spec-value">Native Python</span>
+            </div>
+        </section>
+
+        <section class="search-section">
+            <div class="search-box">
+                <input type="text" id="movieInput" placeholder="Enter a movie title (e.g., Inception)..."
+                    autocomplete="off">
+                <button id="searchBtn" onclick="searchMovie()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </div>
+            <div id="errorMessage" class="error-message"></div>
+        </section>
+
+        <main id="resultsArea" class="hidden">
+            <!-- Hero Section for Searched Movie -->
+            <div id="heroSection" class="hero-section">
+                <!-- Content injected by JS -->
+            </div>
+
+            <div class="recommendations-container">
+                <h2 class="section-title">Analysis Results: Top Matches</h2>
+                <div id="recommendationsGrid" class="movies-grid">
+                    <!-- Content injected by JS -->
+                </div>
+            </div>
+        </main>
+
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Running KNN Algorithm...</p>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <p class="project-id">Project: 04-Movie-Recommendation-System</p>
+                <div class="footer-meta">
+                    <span class="badge">Python</span>
+                    <span class="badge">FastAPI</span>
+                    <span class="badge">Scikit-Learn</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/static/script.js?v=2.0"></script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Match</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Work+Sans:wght@400;500;600;700&family=Source+Code+Pro:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <!-- Navbar (Icons) -->
+    <nav class="navbar">
+        <div class="nav-icons">
+            <a href="https://github.com/S-Sanjai" target="_blank" class="icon-link">
+                <img src="/static/github.svg" alt="GitHub">
+            </a>
+            <a href="https://linkedin.com/in/sanjai-s" target="_blank" class="icon-link">
+                <img src="/static/linkedin.svg" alt="LinkedIn">
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- Header / Landing -->
+        <header class="main-header" id="landingHeader">
+            <h1 class="brand-title">Movie Match</h1>
+            <p class="brand-subtitle">Just a cool way to Visualize a project in my Machine Learning journey</p>
+
+            <div class="search-container">
+                <div class="search-bar">
+                    <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3C5.91 3 3 5.91 3 9.5C3 13.09 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z"
+                            fill="#999" />
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Search Movies..." autocomplete="off">
+                </div>
+            </div>
+
+            <div class="scroll-indicator">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <path d="M7 13L12 18L17 13M7 6L12 11L17 6" />
+                </svg>
+            </div>
+        </header>
+
+        <!-- Results Section (Hidden initially) -->
+        <main id="resultsSection" class="results-hidden">
+
+            <!-- Hero Movie Card -->
+            <div id="heroMovie" class="hero-movie">
+                <!-- Injected via JS -->
+            </div>
+
+            <!-- Recommendations -->
+            <section class="recommendations">
+                <h2 class="section-title">Recommended Movies</h2>
+                <div class="movies-grid" id="recommendationsGrid">
+                    <!-- Injected via JS -->
+                </div>
+            </section>
+
+            <!-- Footer Block -->
+            <div class="footer-block">
+                <div class="footer-content">
+                    <h2 class="footer-title">Movie Match</h2>
+                    <p class="footer-subtitle">Just a cool way to Visualize a project in my Machine Learning journey</p>
+
+                    <div class="project-overview">
+                        <h3 class="overview-title">PROJECT OVERVIEW</h3>
+                        <ul class="overview-list">
+                            <li>Implemented <strong>scratch KNN</strong> using <strong>cosine similarity</strong> on
+                                sparse matrices to find top-k similar movies.</li>
+                            <li>Local CSV search with automatic <strong>TMDB API fallback</strong> for missing movies
+                                and recommendations.</li>
+                            <li>Combined <strong>TF-IDF vectors</strong> from movie overviews with <strong>multi-hot
+                                    encoded</strong> genres for hybrid feature representation.</li>
+                            <li>Monkeypatched socket with <strong>Google DNS (8.8.8.8)</strong> to bypass ISP blocks for
+                                TMDB API access.</li>
+                            <li><strong>FastAPI backend</strong> with async endpoints and threadpool execution for TMDB
+                                API integration.</li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links">
+                        <a href="https://github.com/S-Sanjai" target="_blank">
+                            <img src="/static/github.svg" class="footer-icon" alt="GitHub"> @github.com/S-Sanjai
+                        </a>
+                        <a href="https://linkedin.com/in/sanjai-s" target="_blank">
+                            <img src="/static/linkedin.svg" class="footer-icon" alt="LinkedIn">
+                            @linkedin.com/in/sanjai-s
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loader"></div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

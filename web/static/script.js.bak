@@ -1,0 +1,113 @@
+document.getElementById('movieInput').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        searchMovie();
+    }
+});
+
+async function searchMovie() {
+    const input = document.getElementById('movieInput');
+    const title = input.value.trim();
+    const errorMsg = document.getElementById('errorMessage');
+    const loading = document.getElementById('loading');
+    const resultsArea = document.getElementById('resultsArea');
+
+    // Reset UI
+    errorMsg.textContent = '';
+    resultsArea.classList.add('hidden');
+
+    if (!title) {
+        errorMsg.textContent = 'Please enter a movie title.';
+        return;
+    }
+
+    loading.classList.remove('hidden');
+
+    try {
+        const response = await fetch(`/search?title=${encodeURIComponent(title)}`);
+        const data = await response.json();
+
+        loading.classList.add('hidden');
+
+        if (data.error) {
+            errorMsg.textContent = data.error;
+            return;
+        }
+
+        displayResults(data);
+
+    } catch (error) {
+        loading.classList.add('hidden');
+        errorMsg.textContent = `Error: ${error.message}`;
+        console.error('Error:', error);
+    }
+}
+
+function displayResults(data) {
+    const resultsArea = document.getElementById('resultsArea');
+    const heroSection = document.getElementById('heroSection');
+    const recommendationsGrid = document.getElementById('recommendationsGrid');
+
+    // 1. Render Hero Section (Searched Movie)
+    renderHero(heroSection, data.movie);
+
+    // 2. Render Recommendations
+    recommendationsGrid.innerHTML = '';
+    data.recommendations.forEach(movie => {
+        recommendationsGrid.innerHTML += createMovieCard(movie);
+    });
+
+    resultsArea.classList.remove('hidden');
+}
+
+// 3. New Function for Click Navigation
+function triggerSearch(title) {
+    const input = document.getElementById('movieInput');
+    input.value = title;
+    searchMovie();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderHero(container, movie) {
+    const backdropUrl = movie.backdrop || movie.poster;
+
+    // Set background overlay
+    container.style.backgroundImage = `url('${backdropUrl}')`;
+
+    container.innerHTML = `
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-poster-wrapper">
+                <img src="${movie.poster}" alt="${movie.title}">
+            </div>
+            <div class="hero-details">
+                <h1 class="hero-title">${movie.title}</h1>
+                
+                <div class="hero-meta">
+                    <span class="spec-value">98% MATCH</span> • 
+                    <span>${movie.release_date ? movie.release_date.split('-')[0] : 'N/A'}</span> • 
+                    <span>${movie.genres ? movie.genres.slice(0, 3).join(' / ') : 'Genre N/A'}</span>
+                </div>
+                
+                <p class="hero-overview">${movie.overview}</p>
+            </div>
+        </div>
+    `;
+}
+
+function createMovieCard(movie) {
+    // Escape single quotes in title for the onclick handler
+    const safeTitle = movie.title.replace(/'/g, "\\'");
+
+    const score = movie.similarity ? Math.round(movie.similarity * 100) : 0;
+    const scoreHtml = score > 0 ? `<div class="similarity-score">MATCH: ${score}%</div>` : '';
+
+    return `
+        <div class="movie-card" onclick="triggerSearch('${safeTitle}')">
+            <img src="${movie.poster}" alt="${movie.title}" onerror="this.src='https://via.placeholder.com/500x750?text=No+Image'">
+            <div class="card-overlay">
+                <h3>${movie.title}</h3>
+                ${scoreHtml}
+            </div>
+        </div>
+    `;
+}
