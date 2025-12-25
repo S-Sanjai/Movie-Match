@@ -32,8 +32,8 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie, onClick }) => {
             but for others it might differ.
             For safety, let's add a subtle gradient overlay with title at bottom on hover. 
         */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                    <h3 className="text-white font-bold text-lg leading-tight">{movie.title}</h3>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3 sm:p-4">
+                    <h3 className="text-white font-bold text-sm sm:text-base md:text-lg leading-tight">{movie.title}</h3>
                     <p className="text-gray-300 text-xs mt-1">
                         {movie.releaseDate ? movie.releaseDate.split('-')[0] : ''}
                     </p>

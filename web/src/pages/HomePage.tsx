@@ -46,12 +46,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onSelectMovie }) => {
         <div className="min-h-screen relative bg-black text-white font-poppins selection:bg-orange-500/30 selection:text-orange-100 flex flex-col">
 
             {/* Top Right Icons */}
-            <div className="absolute top-8 right-8 flex gap-6 z-20">
+            <div className="absolute top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 flex gap-3 sm:gap-4 md:gap-6 z-20">
                 <a href="https://github.com/S-Sanjai" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 transition-colors">
-                    <GithubIcon className="w-8 h-8" />
+                    <GithubIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
                 </a>
                 <a href="https://linkedin.com/in/sanjai-s" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 transition-colors">
-                    <LinkedinIcon className="w-8 h-8" />
+                    <LinkedinIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
                 </a>
             </div>
 
@@ -59,8 +59,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onSelectMovie }) => {
             <div className="h-screen w-full flex flex-col items-center justify-center px-4 relative z-10">
                 {/* Title */}
                 <h1
-                    className={`text-6xl md:text-8xl font-bold mb-4 text-center font-poppins transition-all duration-[1500ms] ease-out 
-                        ${animateTitle ? 'tracking-[9px] hover:tracking-[10px] cursor-default' : 'tracking-[0px] opacity-0 translate-y-4'}`}
+                    className={`text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-4 text-center font-poppins transition-all duration-[1500ms] ease-out 
+                        ${animateTitle ? 'tracking-[4px] sm:tracking-[6px] md:tracking-[9px] hover:tracking-[5px] sm:hover:tracking-[7px] md:hover:tracking-[10px] cursor-default' : 'tracking-[0px] opacity-0 translate-y-4'}`}
                     style={{
                         opacity: animateTitle ? 1 : 0,
                         transform: animateTitle ? 'translateY(0)' : 'translateY(20px)'
@@ -70,29 +70,29 @@ export const HomePage: React.FC<HomePageProps> = ({ onSelectMovie }) => {
                 </h1>
 
                 {/* Subtitle */}
-                <p className="text-gray-400 font-mono text-sm md:text-base mb-16 text-center w-full">
+                <p className="text-gray-400 font-mono text-xs sm:text-sm md:text-base mb-8 sm:mb-12 md:mb-16 text-center w-full px-4">
                     Just a cool way to Visualize a project in my Machine Learning journey
                 </p>
 
                 {/* Search Bar */}
-                <div className="w-full max-w-xl relative">
+                <div className="w-full max-w-xl relative px-4 sm:px-0">
                     <SearchBar onSelectMovie={onSelectMovie} />
                 </div>
             </div>
 
             {/* Chevron Indicator - Fixed at bottom */}
             <div
-                className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 animate-bounce opacity-50 cursor-pointer hover:opacity-100 transition-all duration-500"
+                className="fixed bottom-6 sm:bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 z-50 animate-bounce opacity-50 cursor-pointer hover:opacity-100 transition-all duration-500"
                 onClick={handleArrowClick}
             >
                 <div className={`transform transition-transform duration-500 ${isScrolled ? 'rotate-180' : 'rotate-0'}`}>
-                    <ChevronDownIcon className="w-10 h-10" />
+                    <ChevronDownIcon className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10" />
                 </div>
             </div>
 
             {/* Footer Content - Below the fold */}
             <div className="w-full pb-10 bg-black" id="project-details">
-                <div className="max-w-6xl mx-auto px-6 py-20">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 md:py-20">
                     <ProjectDetails />
                 </div>
             </div>

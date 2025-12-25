@@ -70,9 +70,9 @@ export const ResultsPage: React.FC<ResultsPageProps> = ({ initialMovie, onSelect
             <div className="relative z-10 flex flex-col min-h-screen">
                 <Navbar onNavigateHome={onNavigateHome} />
 
-                <div className="flex-1 w-full max-w-[1920px] mx-auto flex flex-col pt-24">
+                <div className="flex-1 w-full max-w-[1920px] mx-auto flex flex-col pt-16 sm:pt-20 md:pt-24">
                     {/* Search Bar - Moved here, below the navbar */}
-                    <div className="w-full flex justify-center py-6 px-4 z-20 relative">
+                    <div className="w-full flex justify-center py-4 sm:py-5 md:py-6 px-4 z-20 relative">
                         <div className="w-full max-w-xl">
                             <SearchBar onSelectMovie={handleSearchSelect} compact={true} />
                         </div>
