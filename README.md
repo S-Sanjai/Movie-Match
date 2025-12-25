@@ -40,19 +40,17 @@ Built with Custom ML Algorithms · React · TypeScript · FastAPI
 
 ## 📸 Preview
 
-````carousel
 ### Homepage
 ![Movie-Match Homepage](web/src/assets/Homepage.png)
-<!-- slide -->
+
 ### Search & Results
 ![Movie Details - Man of Steel](web/src/assets/manofsteel.png)
-<!-- slide -->
+
 ### Full Experience
 ![Complete Interface](web/src/assets/full.png)
-<!-- slide -->
+
 ### Project Details
 ![Technical Overview](web/src/assets/Project.png)
-````
 
 > **Live Demo**: [https://s-sanjai.github.io/Movie-Match/](https://s-sanjai.github.io/Movie-Match/)
 
